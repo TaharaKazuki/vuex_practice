@@ -7,23 +7,31 @@
         <span class="price">{{ product.price }}</span>
       </li>
     </ul>
+    <p>{{ counter }}</p>
     <button @click="reducePrice(4)">Reduce Price</button>
+    <button @click="addCounter(5)">Click</button>
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations, mapActions } from 'vuex';
 
   export default {
     computed: {
       products() {
         return this.$store.state.products;
       },
-      ...mapGetters(['saleProducts']),
+      ...mapGetters(['saleProducts','counter']),
     },
     methods: {
-      reducePrice(amount){
-        this.$store.dispatch('reducePrice',amount);
-      }
+//      reducePrice(amount){
+//        this.$store.dispatch('reducePrice',amount);
+//      },
+      ...mapActions([
+        'reducePrice'
+      ]),
+      ...mapMutations([
+        'addCounter'
+      ])
     }
   }
 </script>

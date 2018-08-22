@@ -11,7 +11,8 @@ export default new Vuex.Store({
       { name: 'Shiny Star', price: 40 },
       { name: 'Green Shells', price: 60 },
       { name: 'Red Shells', price: 80 }
-    ]
+    ],
+    counter: 0
   },
   getters: {
     saleProducts: state => {
@@ -22,13 +23,17 @@ export default new Vuex.Store({
         }
       });
       return saleProduct;
-    }
+    },
+    counter: state => state.counter
   },
   mutations: {
     reducePrice: (state, payload) => {
       state.products.forEach(product=>{
         product.price -= payload;
       });
+    },
+    addCounter: (state, payload) => {
+      state.counter += payload;
     }
   },
   actions: {
